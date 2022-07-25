@@ -1,15 +1,18 @@
 import 'package:anime_list/models/anime_detail_model.dart';
 import 'package:anime_list/models/anime_list_model.dart';
 import 'package:anime_list/services/anime_api.dart';
+import 'package:anime_list/services/local_storage.dart';
 import 'package:flutter/material.dart';
 
 class AnimeProvider with ChangeNotifier {
   final AnimeAPI _animeApi = AnimeAPI();
+  final LocalStorage _localStorage = LocalStorage();
   List<AnimeListModel> listAnime = [];
   List<AnimeListModel> libraryAnime = [];
   late AnimeDetailModel detailAnime;
 
   void getAnimeList() async {
+    libraryAnime = await _localStorage.loadLibrary();
     listAnime = await _animeApi.getAllAnimeList();
     notifyListeners();
   }
@@ -30,13 +33,15 @@ class AnimeProvider with ChangeNotifier {
     return genre;
   }
 
-  addToLibrary(AnimeListModel animeList) {
+  addToLibrary(AnimeListModel animeList) async {
     libraryAnime.add(animeList);
+    await _localStorage.saveLibrary(libraryAnime);
     notifyListeners();
   }
 
-  deleteFromLibrary(AnimeListModel animeList) {
+  deleteFromLibrary(AnimeListModel animeList) async {
     libraryAnime.remove(animeList);
+    await _localStorage.saveLibrary(libraryAnime);
     notifyListeners();
   }
 }

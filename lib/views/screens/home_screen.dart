@@ -116,9 +116,8 @@ class HomeScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        if (animeProvider.libraryAnime.contains(
-                          animeProvider.listAnime[i],
-                        ))
+                        if (animeProvider.libraryAnime.any((element) =>
+                            element.id == animeProvider.listAnime[i].id))
                           const Icon(
                             Icons.bookmark_added,
                             color: Colors.orange,

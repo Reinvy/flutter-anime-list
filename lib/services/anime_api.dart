@@ -11,6 +11,7 @@ class AnimeAPI {
       Response response = await dio.get('${_baseUrl}complete/');
 
       List<AnimeListModel> listAnime = [];
+      print(response.data['animeList']);
       response.data['animeList'].forEach((v) {
         listAnime.add(AnimeListModel.fromJson(v));
       });
