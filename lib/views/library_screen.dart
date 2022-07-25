@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../provider/anime_provider.dart';
-import 'detail_screen.dart';
+import 'package:anime_list/provider/anime_provider.dart';
+import 'package:anime_list/views/detail_screen.dart';
 
 class LibraryScreen extends StatelessWidget {
   const LibraryScreen({Key? key}) : super(key: key);

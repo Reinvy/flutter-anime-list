@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:anime_list/models/anime_list_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:anime_list/models/anime_list_model.dart';
 
 class LocalStorage {
   Future saveLibrary(List<AnimeListModel> listAnime) async {

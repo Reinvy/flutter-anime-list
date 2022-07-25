@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:anime_list/models/anime_detail_model.dart';
 import 'package:anime_list/models/anime_list_model.dart';
 import 'package:anime_list/services/anime_api.dart';
 import 'package:anime_list/services/local_storage.dart';
-import 'package:flutter/material.dart';
 
 class AnimeProvider with ChangeNotifier {
   final AnimeAPI _animeApi = AnimeAPI();
@@ -11,10 +11,11 @@ class AnimeProvider with ChangeNotifier {
   List<AnimeListModel> libraryAnime = [];
   late AnimeDetailModel detailAnime;
 
-  void getAnimeList() async {
+  Future<bool> getAnimeList() async {
     libraryAnime = await _localStorage.loadLibrary();
     listAnime = await _animeApi.getAllAnimeList();
     notifyListeners();
+    return true;
   }
 
   Future<bool> getDetailAnime(id) async {

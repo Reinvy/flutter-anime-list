@@ -1,5 +1,3 @@
-// ignore_for_file: unnecessary_new, prefer_collection_literals
-
 class AnimeListModel {
   late String title;
   late String id;
@@ -27,7 +25,7 @@ class AnimeListModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['title'] = title;
     data['id'] = id;
     data['thumb'] = thumb;

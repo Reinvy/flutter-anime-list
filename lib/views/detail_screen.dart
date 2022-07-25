@@ -1,6 +1,6 @@
-import 'package:anime_list/provider/anime_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:anime_list/provider/anime_provider.dart';
 
 class DetailScreen extends StatelessWidget {
   const DetailScreen({Key? key, required this.id}) : super(key: key);
