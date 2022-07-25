@@ -1,3 +1,4 @@
+import 'package:anime_list/models/anime_detail_model.dart';
 import 'package:anime_list/models/anime_list_model.dart';
 import 'package:dio/dio.dart';
 
@@ -19,16 +20,14 @@ class AnimeAPI {
     }
   }
 
-  Future<List<AnimeListModel>> getAnimeById(String id) async {
+  Future<AnimeDetailModel> getAnimeById(String id) async {
     try {
       Response response = await dio.get('${_baseUrl}anime/$id');
 
-      List<AnimeListModel> listAnime = [];
-      response.data['animeList'].forEach((v) {
-        listAnime.add(AnimeListModel.fromJson(v));
-      });
+      AnimeDetailModel detailAnime = AnimeDetailModel.fromJson(response.data);
+      print(detailAnime.title);
 
-      return listAnime;
+      return detailAnime;
     } catch (e) {
       print('error');
       print(e);

@@ -1,5 +1,6 @@
 import 'package:anime_list/models/anime_list_model.dart';
 import 'package:anime_list/provider/anime_provider.dart';
+import 'package:anime_list/views/screens/detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +21,16 @@ class HomeScreen extends StatelessWidget {
       ),
       itemBuilder: (ctx, i) {
         return InkWell(
-          onTap: () {},
+          onTap: () async {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (ctx) {
+                return DetailScreen(
+                  id: animeProvider.listAnime[i].id,
+                );
+              }),
+            );
+          },
           child: ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: Container(
