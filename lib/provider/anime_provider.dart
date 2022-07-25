@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 class AnimeProvider with ChangeNotifier {
   final AnimeAPI _animeApi = AnimeAPI();
   List<AnimeListModel> listAnime = [];
+  List<AnimeListModel> libraryAnime = [];
   late AnimeDetailModel detailAnime;
 
   void getAnimeList() async {
@@ -27,5 +28,15 @@ class AnimeProvider with ChangeNotifier {
 
     genre = genre.substring(0, genre.length - 2);
     return genre;
+  }
+
+  addToLibrary(AnimeListModel animeList) {
+    libraryAnime.add(animeList);
+    notifyListeners();
+  }
+
+  deleteFromLibrary(AnimeListModel animeList) {
+    libraryAnime.remove(animeList);
+    notifyListeners();
   }
 }

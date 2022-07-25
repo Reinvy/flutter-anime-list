@@ -1,4 +1,3 @@
-import 'package:anime_list/models/anime_list_model.dart';
 import 'package:anime_list/provider/anime_provider.dart';
 import 'package:anime_list/views/screens/detail_screen.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +20,67 @@ class HomeScreen extends StatelessWidget {
       ),
       itemBuilder: (ctx, i) {
         return InkWell(
+          onLongPress: () {
+            if (animeProvider.libraryAnime.contains(
+              animeProvider.listAnime[i],
+            )) {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: const Text('Delete from Library'),
+                    content: const Text('Are you sure?'),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Cancel'),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          // Fungsi Delete from Library
+                          animeProvider.deleteFromLibrary(
+                            animeProvider.libraryAnime[i],
+                          );
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Ok'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            } else {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: const Text('Add to Library'),
+                    content: const Text('Are you sure?'),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Cancel'),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          // Fungsi Add to Library
+                          animeProvider.addToLibrary(
+                            animeProvider.listAnime[i],
+                          );
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Ok'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            }
+          },
           onTap: () async {
             Navigator.push(
               context,
@@ -56,6 +116,23 @@ class HomeScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
+                        if (animeProvider.libraryAnime.contains(
+                          animeProvider.listAnime[i],
+                        ))
+                          const Icon(
+                            Icons.bookmark_added,
+                            color: Colors.orange,
+                            size: 28,
+                          )
+                        else
+                          const Icon(
+                            Icons.bookmark_add,
+                            color: Colors.grey,
+                            size: 28,
+                          ),
+                        const Expanded(
+                          child: SizedBox(),
+                        ),
                         const Icon(
                           Icons.star,
                           color: Colors.orange,
