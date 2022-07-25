@@ -1,7 +1,11 @@
+import 'package:anime_list/models/anime_list_model.dart';
+import 'package:anime_list/provider/anime_provider.dart';
+import 'package:anime_list/services/anime_api.dart';
 import 'package:anime_list/views/screens/home_screen.dart';
 import 'package:anime_list/views/screens/library_screen.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MainNavigation extends StatefulWidget {
   const MainNavigation({Key? key}) : super(key: key);
@@ -13,10 +17,21 @@ class MainNavigation extends StatefulWidget {
 class _MainNavigationState extends State<MainNavigation> {
   int _page = 0;
 
+  List<AnimeListModel> listAnime = [];
+
   final List<Widget> _listPage = [
     const HomeScreen(),
     const LibraryScreen(),
   ];
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Provider.of<AnimeProvider>(context, listen: false).getAnimeList();
+    });
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

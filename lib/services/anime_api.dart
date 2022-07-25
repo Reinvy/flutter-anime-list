@@ -5,7 +5,7 @@ class AnimeAPI {
   final Dio dio = Dio();
   final String _baseUrl = 'https://otakudesu-api.herokuapp.com/api/';
 
-  getAllAnimeList() async {
+  Future<List<AnimeListModel>> getAllAnimeList() async {
     try {
       Response response = await dio.get('${_baseUrl}complete/');
 
@@ -13,15 +13,13 @@ class AnimeAPI {
       response.data['animeList'].forEach((v) {
         listAnime.add(AnimeListModel.fromJson(v));
       });
-
-      print(listAnime[0].title);
+      return listAnime;
     } catch (e) {
-      print('error');
-      print(e);
+      rethrow;
     }
   }
 
-  getAnimeById(String id) async {
+  Future<List<AnimeListModel>> getAnimeById(String id) async {
     try {
       Response response = await dio.get('${_baseUrl}anime/$id');
 
@@ -30,10 +28,11 @@ class AnimeAPI {
         listAnime.add(AnimeListModel.fromJson(v));
       });
 
-      print(listAnime[0].title);
+      return listAnime;
     } catch (e) {
       print('error');
       print(e);
+      rethrow;
     }
   }
 }
