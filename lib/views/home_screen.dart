@@ -21,9 +21,8 @@ class HomeScreen extends StatelessWidget {
       itemBuilder: (ctx, i) {
         return InkWell(
           onLongPress: () {
-            if (animeProvider.libraryAnime.contains(
-              animeProvider.listAnime[i],
-            )) {
+            if (animeProvider.libraryAnime.any(
+                (element) => element.id == animeProvider.listAnime[i].id)) {
               showDialog(
                 context: context,
                 builder: (context) {
@@ -40,8 +39,11 @@ class HomeScreen extends StatelessWidget {
                       TextButton(
                         onPressed: () {
                           // Fungsi Delete from Library
+                          int index = animeProvider.libraryAnime.indexWhere(
+                              (element) =>
+                                  element.id == animeProvider.listAnime[i].id);
                           animeProvider.deleteFromLibrary(
-                            animeProvider.libraryAnime[i],
+                            animeProvider.libraryAnime[index],
                           );
                           Navigator.pop(context);
                         },

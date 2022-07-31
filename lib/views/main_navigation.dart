@@ -47,7 +47,7 @@ class _MainNavigationState extends State<MainNavigation> {
           });
         },
         color: Colors.blue,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         items: const <Widget>[
           Icon(Icons.home),
           Icon(Icons.bookmark),
